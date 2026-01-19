@@ -15,26 +15,45 @@ class ContactInfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12.h),
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.h),
+      padding: EdgeInsets.all(16.r),
+      width: 350.w, // ডেসকটপে সুন্দর দেখানোর জন্য ফিক্সড উইডথ
+      decoration: BoxDecoration(
+        color: const Color(0xFF161B22), // আপনার থিমের সাথে ম্যাচিং কার্ড কালার
+        borderRadius: BorderRadius.circular(15.r),
+        border: Border.all(color: Colors.white.withOpacity(0.05)),
+      ),
       child: Row(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             padding: EdgeInsets.all(12.r),
             decoration: BoxDecoration(
-              color: Colors.blueAccent.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(10.r),
+              color: Colors.blueAccent.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Icon(icon, color: Colors.blueAccent, size: 24.sp),
           ),
           SizedBox(width: 15.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(label, style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
-              Text(value, style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold, color: Colors.white)),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: TextStyle(color: Colors.grey, fontSize: 13.sp),
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  value,
+                  style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

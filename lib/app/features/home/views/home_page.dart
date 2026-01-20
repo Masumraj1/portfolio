@@ -4,9 +4,11 @@ import '../providers/scroll_controller_provider.dart';
 import '../widgets/about_section.dart';
 import '../widgets/contact_section.dart';
 import '../widgets/custom_nav_bar.dart';
+import '../widgets/education_section.dart';
 import '../widgets/experience_section.dart';
 import '../widgets/footer_section.dart';
 import '../widgets/hero_section.dart';
+import '../widgets/mobile_drawer.dart';
 import '../widgets/project_section.dart';
 import '../widgets/skill_section.dart';
 import '../widgets/stats_section.dart';
@@ -21,6 +23,7 @@ class HomePage extends ConsumerWidget {
 
     // Keys for Scrolling
     final aboutKey = GlobalKey();
+    final educationKey = GlobalKey();
     final skillsKey = GlobalKey();
     final expKey = GlobalKey();
     final projectsKey = GlobalKey();
@@ -35,6 +38,18 @@ class HomePage extends ConsumerWidget {
     }
 
     return Scaffold(
+      drawerEnableOpenDragGesture: true,
+      drawer: isMobile
+          ? MobileDrawer(
+        scrollTo: scrollTo,
+        aboutKey: aboutKey,
+        educationKey: educationKey,
+        skillsKey: skillsKey,
+        expKey: expKey,
+        projectsKey: projectsKey,
+        contactKey: contactKey,
+      )
+          : null,
       body: Column(
         children: [
           // ===========>>Navbar <<=============
@@ -45,7 +60,7 @@ class HomePage extends ConsumerWidget {
             skillsKey: skillsKey,
             expKey: expKey,
             projectsKey: projectsKey,
-            contactKey: contactKey,
+            contactKey: contactKey, educationKey: educationKey,
           ),
 
 
@@ -70,6 +85,11 @@ class HomePage extends ConsumerWidget {
                     sectionKey: aboutKey,
                     isMobile: isMobile,
                   ),
+
+                  EducationSection(
+                    sectionKey: educationKey,
+                    isMobile: isMobile,
+                  ),
                   //===============Skill Section===========
                   SkillsSection(
                     sectionKey: skillsKey,
@@ -85,14 +105,14 @@ class HomePage extends ConsumerWidget {
                     sectionKey: projectsKey,
                     isMobile: isMobile,
                   ),
-                //  //================Contact Section===============
-                //   ContactSection(
-                //     sectionKey: contactKey,
-                //     isMobile: isMobile,
-                //   ),
-                //
-                //   //=============Footer Section==========
-                //   const FooterSection(),
+                 //================Contact Section===============
+                  ContactSection(
+                    sectionKey: contactKey,
+                    isMobile: isMobile,
+                  ),
+
+                  //=============Footer Section==========
+                  const FooterSection(),
                 ],
               ),
             ),

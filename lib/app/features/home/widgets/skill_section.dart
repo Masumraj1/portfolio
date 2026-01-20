@@ -15,9 +15,20 @@ class SkillsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> skillCategories = [
       {
-        'title': 'Development',
-        'icon': Icons.terminal_rounded,
-        'skills': ['Flutter', 'Dart', 'Native Integration', 'Clean Architecture', 'Method Channel']
+        'title': 'Programming Languages',
+        'icon': Icons.code_rounded,
+        'skills': ['Dart (Expert)', 'Kotlin (Expert)', 'Java (Expert)'],
+      },
+      {
+        'title': 'Mobile Development',
+        'icon': Icons.phone_android_rounded,
+        'skills': [
+          'Flutter',
+          'Android Native',
+          'Platform Channels',
+          'Clean Architecture',
+          'SOLID Principles',
+        ],
       },
       {
         'title': 'State Management',

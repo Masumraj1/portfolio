@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../providers/scroll_controller_provider.dart';
 
@@ -13,26 +14,39 @@ class FooterSection extends ConsumerWidget {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 20.w),
+      padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 20.w),
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(color: Colors.white.withOpacity(0.05)),
+          top: BorderSide(color: Colors.white.withValues(alpha: 0.05)),
         ),
       ),
       child: Column(
         children: [
-          // Social Links
+          /// Social Icons
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _socialIcon(Icons.link, "LinkedIn"),
-              _socialIcon(Icons.code, "GitHub"),
-              _socialIcon(Icons.facebook, "Facebook"),
+              _socialSvgIcon(
+                asset: 'assets/icons/linkedin.svg',
+                tooltip: 'LinkedIn',
+                onTap: () {},
+              ),
+              _socialSvgIcon(
+                asset: 'assets/icons/github.svg',
+                tooltip: 'GitHub',
+                onTap: () {},
+              ),
+              _socialSvgIcon(
+                asset: 'assets/icons/facebook.svg',
+                tooltip: 'Facebook',
+                onTap: () {},
+              ),
             ],
           ),
-          SizedBox(height: 20.h),
 
-          // Copyright Text
+          SizedBox(height: 24.h),
+
+          /// Copyright
           Text(
             "© 2026 Md. Masum Rana. All Rights Reserved.",
             style: TextStyle(
@@ -40,21 +54,29 @@ class FooterSection extends ConsumerWidget {
               fontSize: 14.sp,
             ),
           ),
-          SizedBox(height: 10.h),
 
-          // "Back to Top" functionality using Riverpod
+          SizedBox(height: 14.h),
+
+          /// Back to Top
           TextButton.icon(
             onPressed: () {
               scrollController.animateTo(
                 0,
-                duration: const Duration(milliseconds: 1000),
+                duration: const Duration(milliseconds: 900),
                 curve: Curves.easeInOut,
               );
             },
-            icon: Icon(Icons.arrow_upward, size: 16.sp, color: Colors.blueAccent),
+            icon: Icon(
+              Icons.arrow_upward_rounded,
+              size: 16.sp,
+              color: Colors.blueAccent,
+            ),
             label: Text(
               "Back to Top",
-              style: TextStyle(color: Colors.blueAccent, fontSize: 14.sp),
+              style: TextStyle(
+                color: Colors.blueAccent,
+                fontSize: 14.sp,
+              ),
             ),
           ),
         ],
@@ -62,14 +84,37 @@ class FooterSection extends ConsumerWidget {
     );
   }
 
-  Widget _socialIcon(IconData icon, String tooltip) {
+  /// SVG Social Icon Widget
+  Widget _socialSvgIcon({
+    required String asset,
+    required String tooltip,
+    required VoidCallback onTap,
+  }) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
-      child: IconButton(
-        onPressed: () {},
-        tooltip: tooltip,
-        icon: Icon(icon, color: Colors.grey, size: 24.sp),
-        hoverColor: Colors.blueAccent.withOpacity(0.1),
+      padding: EdgeInsets.symmetric(horizontal: 14.w),
+      child: Tooltip(
+        message: tooltip,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(14.r),
+          child: Container(
+            width: 50.w,
+            height: 50.w,
+            padding: EdgeInsets.all(10.r),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14.r),
+              color: Colors.white.withValues(alpha: 0.03),
+            ),
+            child: SvgPicture.asset(
+              asset,
+              fit: BoxFit.contain,
+              colorFilter: const ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

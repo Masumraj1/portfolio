@@ -86,6 +86,7 @@ class HomePage extends ConsumerWidget {
                     isMobile: isMobile,
                   ),
 
+                  //=============Education Section============
                   EducationSection(
                     sectionKey: educationKey,
                     isMobile: isMobile,

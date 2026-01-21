@@ -13,15 +13,13 @@ class ContactSection extends StatelessWidget {
     required this.isMobile,
   });
 
-  // URL লঞ্চ করার ফাংশন
+  // লঞ্চার ফাংশন (Uri কনফিগারেশন সহ)
   Future<void> _launch(String urlString) async {
     final Uri url = Uri.parse(urlString);
     try {
-      if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
-        debugPrint("Could not launch $url");
-      }
+      await launchUrl(url, mode: LaunchMode.externalApplication);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint("Error launching URL: $e");
     }
   }
 
@@ -31,91 +29,114 @@ class ContactSection extends StatelessWidget {
       key: sectionKey,
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        vertical: 80.h,
-        horizontal: isMobile ? 20.w : 100.w,
+        vertical: 100.h,
+        horizontal: isMobile ? 24.w : 120.w,
       ),
       decoration: BoxDecoration(
-        color: Colors.blueAccent.withOpacity(0.02),
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.03))),
+        color: const Color(0xFF0A0E12), // ডার্ক থিম হলে এটি খুব সুন্দর লাগবে
       ),
       child: Column(
         children: [
-          // Section Title
+          // Section Title with Subtitle
           Text(
             "Get In Touch",
-            style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: isMobile ? 28.sp : 40.sp,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              letterSpacing: 1.2,
+            ),
           ),
-          SizedBox(height: 10.h),
-          Container(width: 50.w, height: 4.h, color: Colors.blueAccent),
-          SizedBox(height: 60.h),
+          SizedBox(height: 12.h),
+          Container(
+            width: 60.w,
+            height: 4.h,
+            decoration: BoxDecoration(
+              color: Colors.blueAccent,
+              borderRadius: BorderRadius.circular(10.r),
+            ),
+          ),
+          SizedBox(height: 16.h),
+          Text(
+            "Feel free to reach out for collaborations or just a friendly hello!",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: Colors.white70,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+          SizedBox(height: 80.h),
 
           Flex(
             direction: isMobile ? Axis.vertical : Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Contact Details - Left Side
-              Column(
-                crossAxisAlignment: isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-                children: [
-                  _clickableTile(
-                    onTap: () => _launch('mailto:masumrna927@gmail.com'),
-                    child: const ContactInfoTile(
+              // Left Side: Contact Cards
+              Expanded(
+                flex: isMobile ? 0 : 1,
+                child: Column(
+                  children: [
+                    _buildContactCard(
                       icon: Icons.alternate_email_rounded,
                       label: "Email Me",
                       value: "masumrna927@gmail.com",
+                      onTap: () => _launch('mailto:masumrna927@gmail.com'),
                     ),
-                  ),
-                  _clickableTile(
-                    onTap: () => _launch('tel:+8801731090564'),
-                    child: const ContactInfoTile(
+                    _buildContactCard(
                       icon: Icons.phone_iphone_rounded,
                       label: "Call Me",
                       value: "+880 1731090564",
+                      onTap: () => _launch('tel:+8801731090564'),
                     ),
-                  ),
-                  _clickableTile(
-                    onTap: () => _launch('https://www.google.com/maps/search/?api=1&query=Pollobi+B+Block+Section+12+Dhaka'),
-                    child: const ContactInfoTile(
+                    _buildContactCard(
                       icon: Icons.location_on_rounded,
                       label: "Location",
-                      value: "Pollobi, Section 12, Dhaka",
+                      value: "Pallabi, Section 12, Dhaka",
+                      onTap: () => _launch('https://maps.google.com/?q=Pallabi,Dhaka'),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
 
-              if (!isMobile) SizedBox(width: 80.w),
-              if (isMobile) SizedBox(height: 50.h),
+              if (!isMobile) SizedBox(width: 100.w),
+              if (isMobile) SizedBox(height: 60.h),
 
-              // CTA Button - Right Side
-              Column(
-                children: [
-                  Text(
-                    "Have a project in mind?",
-                    style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
+              // Right Side: CTA Section
+              Expanded(
+                flex: isMobile ? 0 : 1,
+                child: Container(
+                  padding: EdgeInsets.all(40.r),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.03),
+                    borderRadius: BorderRadius.circular(30.r),
+                    border: Border.all(color: Colors.white.withOpacity(0.05)),
                   ),
-                  SizedBox(height: 20.h),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 25.h),
-                      backgroundColor: Colors.blueAccent,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
-                      elevation: 10,
-                      shadowColor: Colors.blueAccent.withOpacity(0.4),
-                    ),
-                    onPressed: () => _launch('mailto:masumrna927@gmail.com?subject=Project Inquiry'),
-                    icon: const Icon(Icons.send_rounded, color: Colors.white),
-                    label: Text(
-                      "Let's Build Something",
-                      style: TextStyle(
-                          fontSize: 18.sp,
+                  child: Column(
+                    children: [
+                      Icon(Icons.rocket_launch_rounded, color: Colors.blueAccent, size: 50.sp),
+                      SizedBox(height: 20.h),
+                      Text(
+                        "Have a project in mind?",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 22.sp,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
+                      SizedBox(height: 15.h),
+                      Text(
+                        "Let's turn your idea into a digital masterpiece.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 14.sp, color: Colors.white60),
+                      ),
+                      SizedBox(height: 35.h),
+                      _buildWhatsAppButton(),
+                    ],
                   ),
-                ],
+                ),
               ),
             ],
           ),
@@ -124,13 +145,73 @@ class ContactSection extends StatelessWidget {
     );
   }
 
-  // GestureDetector Wrapper for Clean Code
-  Widget _clickableTile({required VoidCallback onTap, required Widget child}) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: onTap,
-        child: child,
+  // কন্টাক্ট কার্ড তৈরি করার হেল্পার উইজেট
+  Widget _buildContactCard({
+    required IconData icon,
+    required String label,
+    required String value,
+    required VoidCallback onTap,
+  }) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 20.h),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.all(20.r),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.02),
+              borderRadius: BorderRadius.circular(16.r),
+              border: Border.all(color: Colors.white.withOpacity(0.05)),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(12.r),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Icon(icon, color: Colors.blueAccent, size: 24.sp),
+                ),
+                SizedBox(width: 20.w),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(label, style: TextStyle(color: Colors.white54, fontSize: 12.sp)),
+                    Text(value, style: TextStyle(color: Colors.white, fontSize: 15.sp, fontWeight: FontWeight.w600)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // প্রফেশনাল হোয়াটসঅ্যাপ বাটন
+  Widget _buildWhatsAppButton() {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 22.h),
+        backgroundColor: const Color(0xFF25D366),
+        foregroundColor: Colors.white,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.r)),
+      ),
+      onPressed: () => _launch('https://wa.me/8801731090564?text=Hi%20Masum!'),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.chat_bubble_rounded, size: 20),
+          SizedBox(width: 12.w),
+          Text(
+            "Chat on WhatsApp",
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+          ),
+        ],
       ),
     );
   }

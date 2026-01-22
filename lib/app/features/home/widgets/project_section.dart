@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'project_card.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProjectsSection extends StatelessWidget {
   final GlobalKey sectionKey;
@@ -16,28 +17,25 @@ class ProjectsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> projects = [
       {
-        'title': 'E-Commerce App',
-        'desc': 'Full-stack app with GetX and Firebase.',
-        'image': 'https://via.placeholder.com/400x300',
-        'tech': ['Flutter', 'Firebase', 'GetX']
+        'title': 'Ans Music',
+        'desc': 'Global music distribution & publishing platform. Reach Spotify, Apple Music, and YouTube while retaining 100% copyrights with AI-powered tools.',
+        'imageUrl': 'assets/images/ans_banner.png',
+        'tech': ['Flutter', 'Firebase', 'GetX', 'Rest API'],
+        'playStore': 'https://play.google.com/store/apps/details?id=com.ansmusiclimited.ansmusic',
+        'appStore': '',
+        'apkLink': '',
+        'videoDemo': '',
       },
+
       {
-        'title': 'Task Manager',
-        'desc': 'Productivity tool with local database.',
-        'image': 'https://via.placeholder.com/400x300',
-        'tech': ['Flutter', 'Hive', 'Bloc']
-      },
-      {
-        'title': 'Weather Forecast',
-        'desc': 'Real-time weather updates using OpenWeather API.',
-        'image': 'https://via.placeholder.com/400x300',
-        'tech': ['Dart', 'Rest API']
-      },
-      {
-        'title': 'Portfolio Website',
-        'desc': 'Responsive web portfolio built with Flutter.',
-        'image': 'https://via.placeholder.com/400x300',
-        'tech': ['Flutter Web', 'Riverpod']
+        'title': 'Up A Level K9 Academy',
+        'desc': 'Up A Level K9 Academy is a comprehensive dog training app that helps owners build better behavior and stronger bonds with their dogs. Designed for both puppies and adult dogs, it offers step-by-step training foundations, on-leash and off-leash guidance, and challenges.',
+        'imageUrl': 'assets/images/k9academy_banner.png',
+        'tech': ['Flutter', 'Firebase', 'GetX', 'Rest API'],
+        'playStore': 'https://play.google.com/store/apps/details?id=com.karen.upalevelk9academy&hl=en',
+        'appStore': 'https://apps.apple.com/us/app/up-a-level-k9-academy/id6581483580',
+        'apkLink': '',
+        'videoDemo': '',
       },
     ];
 
@@ -50,12 +48,24 @@ class ProjectsSection extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "Selected Projects",
-            style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.bold),
+            "Selected Work",
+            style: TextStyle(
+              fontSize: isMobile ? 30.sp : 40.sp,
+              fontWeight: FontWeight.w900,
+              color: Colors.white,
+              letterSpacing: -0.5,
+            ),
           ),
           SizedBox(height: 10.h),
-          Container(width: 40.w, height: 3.h, color: Colors.blueAccent),
-          SizedBox(height: 50.h),
+          Container(
+            width: 50.w,
+            height: 5.h,
+            decoration: BoxDecoration(
+              color: Colors.blueAccent,
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          SizedBox(height: 60.h),
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -63,19 +73,233 @@ class ProjectsSection extends StatelessWidget {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: isMobile ? 1 : 2,
               crossAxisSpacing: 30.w,
-              mainAxisSpacing: 30.h,
-              childAspectRatio: 1.5,
+              mainAxisSpacing: 40.h,
+              childAspectRatio: isMobile ? 0.65 : 1.1,
             ),
             itemBuilder: (context, i) {
               final p = projects[i];
               return ProjectCard(
                 title: p['title'],
                 description: p['desc'],
-                imageUrl: p['image'],
-                techStack: p['tech'],
+                imageUrl: p['imageUrl'],
+                techStack: List<String>.from(p['tech']),
+                playStoreUrl: p['playStore'],
+                appStoreUrl: p['appStore'],
+                apkUrl: p['apkLink'],
+                videoUrl: p['videoDemo'],
+                isMobile: isMobile,
               );
             },
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProjectCard extends StatelessWidget {
+  final String title, description, imageUrl;
+  final List<String> techStack;
+  final String? playStoreUrl, appStoreUrl, apkUrl, videoUrl;
+  final bool isMobile;
+
+  const ProjectCard({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.imageUrl,
+    required this.techStack,
+    this.playStoreUrl,
+    this.appStoreUrl,
+    this.apkUrl,
+    this.videoUrl,
+    required this.isMobile,
+  });
+
+  // Dynamic Messaging Logic
+  void _handleLinkAction(BuildContext context, String? url, String platformType) async {
+    if (url == null || url.isEmpty) {
+      String message;
+      IconData icon;
+
+      // Custom message based on what user clicked
+      switch (platformType) {
+        case "App Store":
+          message = "iOS version is currently in development. Stay tuned!";
+          icon = Icons.apple;
+          break;
+        case "APK":
+          message = "The direct APK file is being prepared for secure download.";
+          icon = Icons.android;
+          break;
+        case "Video Demo":
+          message = "We are recording a high-quality demo for you. Coming soon!";
+          icon = Icons.play_circle_fill;
+          break;
+        case "Play Store":
+          message = "Play Store link is currently being updated. Please check back later.";
+          icon = Icons.shop;
+          break;
+        default:
+          message = "This link will be available soon. Thank you for your patience!";
+          icon = Icons.info_outline;
+      }
+
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              Icon(icon, color: Colors.white, size: 20.sp),
+              SizedBox(width: 12.w),
+              Expanded(
+                child: Text(
+                  message,
+                  style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500, color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: const Color(0xFF2C2C2C),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+          margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    } else {
+      final Uri uri = Uri.parse(url);
+      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+        _handleLinkAction(context, null, platformType);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 40,
+            offset: const Offset(0, 15),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 6,
+            child: ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+              child: Container(
+                width: double.infinity,
+                color: const Color(0xFF0D0D0D),
+                child: _buildImage(imageUrl),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 5,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w800, color: const Color(0xFF2D2D2D)),
+                      ),
+                      _buildStatusBadge(),
+                    ],
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    description,
+                    maxLines: 3,
+                    style: TextStyle(fontSize: 13.sp, color: Colors.black54, height: 1.5),
+                  ),
+                  const Spacer(),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: techStack.map((tech) => _buildTechTag(tech)).toList(),
+                    ),
+                  ),
+                  const Divider(height: 25),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Wrap(
+                        spacing: 15.w,
+                        children: [
+                          _buildActionBtn(context, Icons.shop_two_rounded, "Play", Colors.blue, playStoreUrl, "Play Store"),
+                          _buildActionBtn(context, Icons.apple_rounded, "Store", Colors.black, appStoreUrl, "App Store"),
+                          _buildActionBtn(context, Icons.install_mobile_rounded, "APK", Colors.green, apkUrl, "APK"),
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () => _handleLinkAction(context, videoUrl, "Video Demo"),
+                        child: Container(
+                          padding: EdgeInsets.all(8.r),
+                          decoration: BoxDecoration(color: Colors.red.withValues(alpha: 0.1), shape: BoxShape.circle),
+                          child: Icon(Icons.play_arrow_rounded, color: Colors.red, size: 24.sp),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // --- UI Components ---
+  Widget _buildImage(String path) {
+    return path.endsWith('.svg')
+        ? SvgPicture.asset(path, fit: BoxFit.contain)
+        : Image.asset(path, fit: BoxFit.contain, alignment: Alignment.center);
+  }
+
+  Widget _buildStatusBadge() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(colors: [Colors.green, Colors.teal]),
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      child: Text("LIVE", style: TextStyle(fontSize: 10.sp, color: Colors.white, fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Widget _buildTechTag(String label) {
+    return Container(
+      margin: EdgeInsets.only(right: 8.w),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+      decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(8.r)),
+      child: Text(label, style: TextStyle(fontSize: 11.sp, color: Colors.blueAccent, fontWeight: FontWeight.w600)),
+    );
+  }
+
+  Widget _buildActionBtn(BuildContext context, IconData icon, String label, Color color, String? url, String type) {
+    return InkWell(
+      onTap: () => _handleLinkAction(context, url, type),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: color, size: 18.sp),
+          SizedBox(width: 4.w),
+          Text(label, style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold, color: color)),
         ],
       ),
     );

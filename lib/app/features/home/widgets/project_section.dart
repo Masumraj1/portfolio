@@ -37,6 +37,16 @@ class ProjectsSection extends StatelessWidget {
         'apkLink': '',
         'videoDemo': '',
       },
+      {
+        'title': 'PROTIPPZ',
+        'desc': 'The \'Venmo for Athletes\'—a fan-to-player tipping platform providing professional and college athletes with a direct revenue stream through exclusive rewards, specifically designed to bridge the income gap in women’s sports.',
+        'imageUrl': 'assets/images/protippz_banner.png',
+        'tech': ['Flutter', 'Firebase', 'GetX', 'Rest API'],
+        'playStore': 'https://play.google.com/store/apps/details?id=com.coryrains.protppz&hl=en',
+        'appStore': '',
+        'apkLink': '',
+        'videoDemo': '',
+      },
     ];
 
     return Container(

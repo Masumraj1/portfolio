@@ -31,10 +31,10 @@ class ExperienceSection extends StatelessWidget {
       },
       {
         'role': 'Software Engineer (Flutter)',
-        'company': 'Betopia Group',
+        'company': 'Sparktech agency',
         'duration': 'Jan 2024 – Aug 2025',
         'logo': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYKhrVGGuX5aC5NnvvqcxbfcGPVzhev6qo2A&s',
-        'link': 'https://betopiagroup.com/'
+        'link': 'https://www.sparktech.agency/'
       },
     ];
 

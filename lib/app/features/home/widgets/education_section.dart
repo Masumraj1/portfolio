@@ -17,7 +17,7 @@ class EducationSection extends StatelessWidget {
       EducationItem(
         duration: '2023 – Present',
         degree: 'Bachelor of Business Administration (BBA)',
-        institution: 'ZNRF University of Management Sciences (ZUMS), Dhaka',
+        institution: 'Presidency University, Dhaka , Bangladesh',
         icon: Icons.school_rounded,
       ),
       EducationItem(

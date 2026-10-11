@@ -10794,8 +10794,8 @@ break
 case 5:s=l.a
 s===$&&A.a()
 s=A.bh(A.yX(s+240),40)
-r=A.bh(A.a_H(l,B.mK,B.Jd),24)
-q=A.bh(A.a_H(l,B.mK,B.Je),32)
+r=A.bh(A.a_H(l,B.mL,B.Jd),24)
+q=A.bh(A.a_H(l,B.mL,B.Je),32)
 p=A.bh(l.a+15,8)
 o=A.bh(l.a+15,12)
 l.d===$&&A.a()
@@ -27609,7 +27609,7 @@ if(b==null)return!1
 if(!(b instanceof A.rw))return!1
 return b.d===s.d&&J.d(b.a,s.a)&&b.b==s.b&&A.hw(b.c,s.c)},
 gn(a){var s=this,r=s.c
-return A.E(s.d,s.a,s.b,A.b1(r==null?B.mO:r),B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a)},
+return A.E(s.d,s.a,s.b,A.b1(r==null?B.mP:r),B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a)},
 $ihR:1}
 A.wz.prototype={
 OR(a,b){var s=this.Jz(a),r=A.aM(new A.YC(this,b,s))
@@ -40784,7 +40784,7 @@ n=o.w=s.charCodeAt(0)==0?s:s}return n},
 gxt(){var s,r,q=this,p=q.x
 if(p===$){s=q.e
 if(s.length!==0&&s.charCodeAt(0)===47)s=B.c.bt(s,1)
-r=s.length===0?B.mM:A.JY(new A.a8(A.b(s.split("/"),t.s),A.aPt(),t.Gf),t.N)
+r=s.length===0?B.mN:A.JY(new A.a8(A.b(s.split("/"),t.s),A.aPt(),t.Gf),t.N)
 q.x!==$&&A.aJ()
 p=q.x=r}return p},
 gn(a){var s,r=this,q=r.y
@@ -40950,7 +40950,7 @@ gjd(){var s=this.r,r=this.a
 return s<r.length?B.c.bt(r,s+1):""},
 gxt(){var s,r,q=this.e,p=this.f,o=this.a
 if(B.c.cn(o,"/",q))++q
-if(q===p)return B.mM
+if(q===p)return B.mN
 s=A.b([],t.s)
 for(r=q;r<p;++r)if(o.charCodeAt(r)===47){s.push(B.c.a_(o,q,r))
 q=r+1}s.push(B.c.a_(o,q,p))
@@ -52854,8 +52854,8 @@ s=r.U
 r.cj=s==null?null:s.gH5()
 a.a=!1},
 r8(a,b,c){var s,r,q,p,o=this
-o.e7=A.axH(o.e7,B.mN)
-o.hC=A.axH(o.hC,B.mN)
+o.e7=A.axH(o.e7,B.mO)
+o.hC=A.axH(o.hC,B.mO)
 s=o.e7
 r=s!=null&&!s.gP(s)
 s=o.hC
@@ -60582,7 +60582,7 @@ A.hg.prototype={
 H(){return"ModifierKey."+this.b}}
 A.zY.prototype={
 gaiV(){var s,r,q=A.o(t.xS,t.Dk)
-for(s=0;s<9;++s){r=B.mP[s]
+for(s=0;s<9;++s){r=B.mQ[s]
 if(this.ai7(r))q.m(0,r,B.cN)}return q}}
 A.kA.prototype={}
 A.a9o.prototype={
@@ -60620,7 +60620,7 @@ i=$.cC
 if(i!=null)i.$1(new A.aV(r,q,"services library",j,p,!1))}}return!1},
 aa7(a1){var s,r,q,p,o,n,m,l,k,j,i,h,g=a1.c,f=g.gaiV(),e=t.v3,d=A.o(e,t.J),c=A.aI(e),b=this.d,a=A.dT(new A.aB(b,A.m(b).h("aB<1>")),e),a0=a1 instanceof A.mn
 if(a0)a.t(0,g.gix())
-for(s=g.a,r=null,q=0;q<9;++q){p=B.mP[q]
+for(s=g.a,r=null,q=0;q<9;++q){p=B.mQ[q]
 o=$.aCL()
 n=o.j(0,new A.cK(p,B.bs))
 if(n==null)continue
@@ -76213,13 +76213,13 @@ return A.br(s,B.Gs,B.m,s,s,new A.bd(r.x,s,s,s,s,s,r.w),s,r.d,s,s,s,s,s,r.e)},
 $S:493}
 A.Iy.prototype={
 L(a){var s=null,r=this.d,q=r?60*$.k().gK():90*$.k().gK(),p=r?20*$.k().gM():100*$.k().gM(),o=A.aS(s,12*$.k().gK(),s),n=A.pB(A.bC("Education",s,s,A.bf(s,s,B.i,s,s,s,s,s,s,s,s,r?$.k().af(28):$.k().af(38),s,s,B.b0,s,s,!0,s,-0.5,s,s,s,s,s,s),s),new A.a_N()),m=A.aS(s,r?40*$.k().gK():60*$.k().gK(),s),l=$.k().gM(),k=t.U9
-r=A.W(new A.a8(B.mQ,new A.a_O(this),k),k.h("ak.E"))
+r=A.W(new A.a8(B.mK,new A.a_O(this),k),k.h("ak.E"))
 return A.br(s,A.ce(A.b([o,n,m,new A.hK(new A.ao(0,900*l,0,1/0),A.ce(r,B.x,B.t,B.u),s)],t.p),B.x,B.t,B.u),B.m,s,s,s,s,s,this.c,s,new A.aw(p,q,p,q),s,s,1/0)}}
 A.a_N.prototype={
 $1(a){return B.dO.k6(a)},
 $S:33}
 A.a_O.prototype={
-$1(a){return new A.lB(a,this.a.d,B.b.ga5(B.mQ)===a,null)},
+$1(a){return new A.lB(a,this.a.d,B.b.ga5(B.mK)===a,null)},
 $S:494}
 A.k7.prototype={}
 A.lB.prototype={
@@ -79725,7 +79725,7 @@ case"round":return B.PS
 default:return null}},
 a7Z(a){var s,r,q,p,o,n,m
 if(a==null||a==="")return null
-else if(a==="none")return B.mO
+else if(a==="none")return B.mP
 s=B.c.yy(a,A.dr("[ ,]+",!1))
 r=A.b([],t.n)
 for(q=s.length,p=this.a,o=!1,n=0;n<s.length;s.length===q||(0,A.q)(s),++n){m=A.d9(s[n],p,!1)
@@ -84462,13 +84462,13 @@ B.mB=new A.yI(0,"opportunity")
 B.j0=new A.yI(2,"mandatory")
 B.mC=new A.yI(3,"endOfText")
 B.aw=new A.pT(0,"clamp")
-B.mL=s([B.i,B.i3],t.W)
-B.dO=new A.f4(B.dj,B.c2,B.aw,B.mL,null,null)
+B.mM=s([B.i,B.i3],t.W)
+B.dO=new A.f4(B.dj,B.c2,B.aw,B.mM,null,null)
 B.lL=new A.C(1,0.25882352941176473,0.6470588235294118,0.9607843137254902,B.e)
 B.HM=s([B.lL,B.i5],t.W)
 B.He=new A.f4(B.dj,B.c2,B.aw,B.HM,null,null)
 B.kI=new A.dz(1,1)
-B.Hf=new A.f4(B.hu,B.kI,B.aw,B.mL,null,null)
+B.Hf=new A.f4(B.hu,B.kI,B.aw,B.mM,null,null)
 B.DO=new A.C(1,0.5098039215686274,0.6941176470588235,1,B.e)
 B.DI=new A.C(1,0.26666666666666666,0.5411764705882353,1,B.e)
 B.Do=new A.C(1,0.1607843137254902,0.4745098039215686,1,B.e)
@@ -84576,7 +84576,14 @@ B.Vx=new A.l0(6,0.11)
 B.Vv=new A.l0(8,0.12)
 B.Vu=new A.l0(12,0.14)
 B.mJ=s([B.Vt,B.Vy,B.Vw,B.Vx,B.Vv,B.Vu],A.aa("t<l0>"))
-B.mK=s([0,21,51,121,151,191,271,321,360],t.n)
+B.Gl=new A.cH(983342,"MaterialIcons",!1)
+B.Fv=new A.k7("2023 \u2013 Present","Bachelor of Business Administration (BBA)","Presidency University, Dhaka , Bangladesh",B.Gl)
+B.Gf=new A.cH(63470,"MaterialIcons",!1)
+B.Fu=new A.k7("2020","Higher Secondary Certificate (HSC)","Pirgonj Government College, Pirgonj, Thakurgaon",B.Gf)
+B.Gh=new A.cH(63668,"MaterialIcons",!1)
+B.Fw=new A.k7("2018","Secondary School Certificate (SSC)","Nakati Hat High School, Pirgonj, Thakurgaon",B.Gh)
+B.mK=s([B.Fv,B.Fu,B.Fw],A.aa("t<k7>"))
+B.mL=s([0,21,51,121,151,191,271,321,360],t.n)
 B.e7=new A.zA(0,"nonZero")
 B.Mt=new A.zA(1,"evenOdd")
 B.Io=s([B.e7,B.Mt],A.aa("t<zA>"))
@@ -84620,7 +84627,7 @@ B.jH=new A.ME(1,"page")
 B.jI=new A.fJ(B.aK,B.jH)
 B.IL=s([B.zI,B.jI],A.aa("t<aX>"))
 B.IW=s([],t.QP)
-B.mN=s([],A.aa("t<aRM>"))
+B.mO=s([],A.aa("t<aRM>"))
 B.IP=s([],t.E)
 B.IY=s([],t.ER)
 B.IQ=s([],t.tc)
@@ -84633,11 +84640,11 @@ B.IZ=s([],t.v)
 B.j4=s([],t.AO)
 B.IU=s([],t.D1)
 B.j3=s([],t.QF)
-B.mM=s([],t.s)
+B.mN=s([],t.s)
 B.ar=s([],t.oU)
 B.IV=s([],t.Lx)
 B.WJ=s([],t.p)
-B.mO=s([],t.n)
+B.mP=s([],t.n)
 B.IO=s([],t.t)
 B.o=s([],t.ee)
 B.IX=s([],t.XS)
@@ -84661,15 +84668,8 @@ B.jo=new A.hg(5,"numLockModifier")
 B.jp=new A.hg(6,"scrollLockModifier")
 B.jq=new A.hg(7,"functionModifier")
 B.rY=new A.hg(8,"symbolModifier")
-B.mP=s([B.cR,B.cS,B.cT,B.cU,B.jn,B.jo,B.jp,B.jq,B.rY],A.aa("t<hg>"))
+B.mQ=s([B.cR,B.cS,B.cT,B.cU,B.jn,B.jo,B.jp,B.jq,B.rY],A.aa("t<hg>"))
 B.j5=s([!0,!1],t.HZ)
-B.Gl=new A.cH(983342,"MaterialIcons",!1)
-B.Fw=new A.k7("2023 \u2013 Present","Bachelor of Business Administration (BBA)","ZNRF University of Management Sciences (ZUMS), Dhaka",B.Gl)
-B.Gf=new A.cH(63470,"MaterialIcons",!1)
-B.Fu=new A.k7("2020","Higher Secondary Certificate (HSC)","Pirgonj Government College, Pirgonj, Thakurgaon",B.Gf)
-B.Gh=new A.cH(63668,"MaterialIcons",!1)
-B.Fv=new A.k7("2018","Secondary School Certificate (SSC)","Nakati Hat High School, Pirgonj, Thakurgaon",B.Gh)
-B.mQ=s([B.Fw,B.Fu,B.Fv],A.aa("t<k7>"))
 B.Jj=s(["pointerdown","pointermove","pointerleave","pointerup","pointercancel","touchstart","touchend","touchmove","touchcancel","mousedown","mousemove","mouseleave","mouseup","wheel"],t.s)
 B.mR=s([1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576,2097152,4194304,8388608,16777216,33554432,67108864,134217728,268435456,536870912,1073741824,2147483648],t.t)
 B.FO=new A.fw(100)
